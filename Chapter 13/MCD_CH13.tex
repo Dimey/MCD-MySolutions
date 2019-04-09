@@ -1,0 +1,190 @@
+\documentclass[11pt,a4paper,titlepage]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{lipsum}
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm, fouriernc, mathtools}
+\usepackage{microtype} %improves the spacing between words and letters
+
+\usepackage{graphicx}
+\graphicspath{{./pics/}}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{wasysym}
+\usepackage{color, colortbl}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLOR DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
+\newcommand{\textb}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blue}{\color{MyColor1} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blueb}{\color{MyColor1} \usefont{OT1}{lmss}{b}{n}}
+\newcommand{\red}{\color{LightCoral} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\green}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS AND COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    SECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage{sectsty}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%set section/subsections HEADINGS font and color
+\sectionfont{\color{MyColor1}}  % sets colour of sections
+\subsectionfont{\color{MyColor1}}  % sets colour of sections
+
+%set section enumerator to arabic number (see footnotes markings alternatives)
+\renewcommand\thesection{\arabic{section}} %define sections numbering
+\renewcommand\thesubsection{\thesection.\arabic{subsection}} %subsec.num.
+
+%define new section style
+\newcommand{\mysection}{
+	\titleformat{\section} [runin] {\usefont{OT1}{lmss}{b}{n}\color{MyColor1}} 
+	{\thesection} {3pt} {} } 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		CAPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%\captionsetup[figure]{labelfont={color=Black}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		!!!EQUATION (ARRAY) --> USING ALIGN INSTEAD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%using amsmath package to redefine eq. numeration (1.1, 1.2, ...) 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+%set box background to grey in align environment 
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@Aboxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\patchcmd{\@boxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DESIGN CIRCUITS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[siunitx, american, smartlabels, cute inductors, europeanvoltages]{circuitikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\makeatletter
+\let\reftagform@=\tagform@
+\def\tagform@#1{\maketag@@@{(\ignorespaces\textcolor{red}{#1}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+\makeatother
+\usepackage{hyperref}
+\hypersetup{colorlinks=true}
+\usepackage{hypcap}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREPARE TITLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\blue MICROELECTRONIC CIRCUIT DESIGN \\	\blueb Solutions}
+\author{Dimitri Haas}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+\maketitle
+\setcounter{section}{12}
+\section{Small-Signal Modeling and Linear Amplification}
+\setcounter{subsection}{7}
+\subsection{Small-Signal Models for Field-Effect Transistors}
+\subsubsection*{13.80}
+Folgende Werte sind bereits anhand der Aufgabe gegeben:
+\begin{equation*}
+\begin{aligned}
+K_n &= \SI{300}{\micro\ampere\per\square\volt}\\
+V_{TN} &= \SI{1}{\volt}\\
+\lambda &= \SI{0.02}{\per\volt}
+\end{aligned}
+\end{equation*}
+Ab welchem Drainstrom $I_D$ ist keine Spannungsverstärkung mehr vorhanden, also $\mu_f \leq 1$?\\
+\\
+Dazu suchen wir in Tabelle 13.3 nach der Formel für $\mu_f$. Diese lautet
+\[\mu_f = \frac{1}{\lambda}\sqrt{\frac{2K_n}{I_D}}.\]
+Wenn wir nun die Forderung einsetzen und die Gleichung nach $I_D$ umstellen, erhalten wir
+
+\begin{equation*}
+\begin{aligned}
+ & &\frac{1}{\lambda}\sqrt{\frac{2K_n}{I_D}} &\leq 1 \\
+& \Leftrightarrow & \frac{2K_n}{\lambda^2} &\leq I_D \\
+& \Leftrightarrow & \frac{2(\SI{300}{\micro\ampere\per\square\volt})}{(\SI{0.02}{\per\volt})^2} &\leq I_D \\
+& \Leftrightarrow & \SI{1.5}{\ampere} &\leq I_D
+\end{aligned}
+\end{equation*}\\
+Damit liegt ab einem Drainstrom von $I_D = \SI{1.5}{\ampere}$ keine Spannungsverstärkung mehr vor.
+
+\subsubsection*{13.81}
+In dieser Aufgabe soll überprüft werden, ob die Ausdruck
+\[\frac{2v_{gs}}{V_{GS}-V_{TN}}\] 
+eine geeignete lineare Approximation für Ausdruck
+\[\left(1 + \frac{v_{gs}}{V_{GS}-V_{TN}}\right)^2-1\]
+darstellt, wenn $v_{gs} = 0.2(V_{GS}-V_{TN})$ gilt.\\
+\\
+Dazu setzen wir im ersten Schritt in die Ausgangsgleichung das vorgegeben $v_{gs}$ ein und erhalten
+\[\left(1 + \frac{0.2(V_{GS}-V_{TN})}{V_{GS}-V_{TN}}\right)^2-1 = (1 + 0.2)^2-1 = 0.44\]
+Das gleiche wiederholen wir nun für angenäherten Ausdruck:
+\[\frac{(2)(0.2)(V_{GS}-V_{TN})}{V_{GS}-V_{TN}} = 0.4\]
+Betrachten wir nun den relativen Fehler
+\[f = \frac{0.4 - 0.44}{0.44}\SI{100}{\percent} = \SI{-9.1}{\percent} \approx \SI{-10}{\percent}\]
+sehen wir, dass der Fehler bei etwa $\SI{10}{\percent}$ liegt und damit eine gute Näherung darstellt.\\
+\\
+Führen wir die gleichen Berechnungen für $v_{gs} = 0.4(V_{GS}-V_{TN})$ durch, ergibt sich ein Fehler von
+\[f = \frac{0.8 - 0.96}{0.96}\SI{100}{\percent} = \SI{-16.7}{\percent} \approx \SI{-20}{\percent}.\]
+Man sieht also, dass das Signal wirklich sehr klein sein muss, um mithilfe der obigen Annäherung ein gutes Ergebnis zu erzielen.
+
+\subsubsection*{13.84}
+Gegeben ist ein Common-Source-Amplifier mit folgenden Spezifikationen:
+
+\begin{equation*}
+\begin{aligned}
+R_\text{out}^{CS} &= \SI{100}{\kilo\ohm}\\
+\lambda &= \SI{0.02}{\per\volt}\\
+V_{DD} &= \SI{15}{\volt}
+\end{aligned}
+\end{equation*}
+Da ein CS-Amplifier so gestaltet wird, dass etwa \SI{50}{\percent} der Versorgungsspannung über dem Drain-Widerstand abfallen und die Ausgangsspannung weitestgehend der Spannung über dem Drain-Widerstand entspricht, können wir einen Teil des Arbeitspunktes bereits vorzeitig angeben:
+\[V_{DS} = \frac{V_{DD}}{2} = \frac{\SI{15}{\volt}}{2} = \SI{7.5}{\volt}\]
+Nun gilt es noch einen fehlenden Transistor-Parameter zu bestimmen, welcher vollkommen unabhängig von der äußeren CS-Beschaltung ist:
+\begin{equation}\label{eq:r_0} 
+r_0 = \frac{\frac{1}{\lambda}+V_{DS}}{I_D}
+\end{equation}
+Allerdings enthält Gleichung (\ref{eq:r_0}) noch zwei Unbekannte. Wir müssen deshalb noch einen weiteren Zusammenhang ausfindig machen. Fündig wird man, wenn man sich klarmacht, dass der Ausgangswiderstand eine Parallelanordnung der Widerstände $r_0$ und $R_D$ darstellt. Da wir in der Aufgabenstellung seinen Wert übermittelt bekommen haben, können wir schreiben:
+\begin{equation}\label{eq:r_out} 
+R_\text{out} = R_{\text{out}}^{CS} = \frac{r_0 R_D}{r_0+R_D}
+\end{equation}
+Setzt man nun Gleichung (\ref{eq:r_0}) in (\ref{eq:r_out}) ein und verwendet die Beziehung $R_D=\frac{V_{DS}}{I_D}$, erhält man:
+\begin{equation}
+\begin{aligned}
+R_\text{out}^{CS} &= \frac{\frac{\frac{1}{\lambda}+V_{DS}}{I_D}\frac{V_{DS}}{I_D}}{\frac{\frac{1}{\lambda}+V_{DS}}{I_D}+\frac{V_{DS}}{I_D}} \\
+&= \frac{1}{I_D}\frac{\frac{1}{\lambda}+V_{DS}}{\frac{1}{\lambda V_{DS}}+2} \\
+&\approx \frac{6.63}{I_D}
+\end{aligned}
+\end{equation}
+
+
+Stellen wir Gleichung (\ref{eq:r_out}) nach $r_0$ um und setzen sie mit Gleichung (\ref{eq:r_0}) gleich, erhalten wir:
+\begin{equation}\label{eq:r_0_2} 
+\frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{R_{\text{out}}^{CS}R_D}{R_D-R_{\text{out}}^{CS}}
+\end{equation}
+Zu guter Letzt setzen wir in Gleichung (\ref{eq:r_0_2}) noch den Zusammenhang $R_D=\frac{V_{DS}}{I_D}$ ein und können das ganze nach $I_D$ auflösen:
+
+\end{document}
