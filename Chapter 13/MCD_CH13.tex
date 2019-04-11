@@ -172,19 +172,30 @@ Allerdings enthält Gleichung (\ref{eq:r_0}) noch zwei Unbekannte. Wir müssen d
 R_\text{out} = R_{\text{out}}^{CS} = \frac{r_0 R_D}{r_0+R_D}
 \end{equation}
 Setzt man nun Gleichung (\ref{eq:r_0}) in (\ref{eq:r_out}) ein und verwendet die Beziehung $R_D=\frac{V_{DS}}{I_D}$, erhält man:
-\begin{equation}
+\begin{equation} \label{eq:r_outAndId}
 \begin{aligned}
 R_\text{out}^{CS} &= \frac{\frac{\frac{1}{\lambda}+V_{DS}}{I_D}\frac{V_{DS}}{I_D}}{\frac{\frac{1}{\lambda}+V_{DS}}{I_D}+\frac{V_{DS}}{I_D}} \\
 &= \frac{1}{I_D}\frac{\frac{1}{\lambda}+V_{DS}}{\frac{1}{\lambda V_{DS}}+2} \\
 &\approx \frac{6.63}{I_D}
 \end{aligned}
 \end{equation}
-
-
-Stellen wir Gleichung (\ref{eq:r_out}) nach $r_0$ um und setzen sie mit Gleichung (\ref{eq:r_0}) gleich, erhalten wir:
-\begin{equation}\label{eq:r_0_2} 
-\frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{R_{\text{out}}^{CS}R_D}{R_D-R_{\text{out}}^{CS}}
+Da uns $R_\text{out}^{CS}$ bereits in der Aufgabenstellung gegeben wurde, können wir mithilfe von Gleichung (\ref{eq:r_outAndId}) den fehlenden Arbeitspunkt-Parameter bestimmen:
+\begin{equation}
+I_D = \frac{6.63}{R_\text{out}^{CS}} = \frac{6.63}{\SI{100}{\kilo\ohm}} = \SI{66.3}{\micro\ampere}
 \end{equation}
-Zu guter Letzt setzen wir in Gleichung (\ref{eq:r_0_2}) noch den Zusammenhang $R_D=\frac{V_{DS}}{I_D}$ ein und können das ganze nach $I_D$ auflösen:
+Der Arbeitspunkt lautet somit abschließend $(\SI{7.5}{\volt},\SI{66.3}{\micro\ampere})$. Diese Aufgabe kann man sich mithilfe von Figure 13.18 im Buch auf Seite 793 veranschaulichen. Hier müssen lediglich die BJT- durch MOSFET-Bauteile ersetzt werden.
+
+\subsubsection*{13.85}
+In einem CS-Verstärker, ist der Arbeitspunkt gesucht, bei dem wir einen Eingangswiderstand von $R_{\text{in}}^{CS} = \SI{2}{\mega\ohm}$ erhalten. Der darin verbaute Transistor besitzt folgende Parameter:
+\begin{equation*}
+\begin{aligned}
+K_n &= \SI{500}{\micro\ampere\per\square\volt}\\
+V_{TN} &= \SI{1}{\volt}\\
+\lambda &= \SI{0.02}{\per\volt}
+\end{aligned}
+\end{equation*}
+Gearbeitet wird mit einer Versorgungsspannung von \SI{12}{\volt}.\\
+\\
+Die obige Aufgabe kann auch ohne Studium des Abschnitts 13.10.5 im Buch gelöst werden: Da der Transistor selbst einen unendlichen hohen Eingangswiderstand hat, bleibt nur noch $R_G$ als Widerstand übrig. Somit ist der Eingangwiderstand nur von den beiden Gate-Widerständen nicht aber vom Arbeitspunkt abhängig. Jeder Arbeitspunkt ermöglicht damit den oben vorgegeben Eingangswiderstand.
 
 \end{document}
