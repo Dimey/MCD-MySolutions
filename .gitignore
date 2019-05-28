@@ -2,3 +2,7 @@
 Chapter 13/MCD_CH13.synctex.gz
 Chapter 13/MCD_CH13.log
 Chapter 13/MCD_CH13.aux
+*.log
+*.aux
+*.out
+*.gz
