@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.4)  28 MAY 2019 01:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.4)  2 JUN 2019 21:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1921,11 +1921,81 @@ Package babel Info: Redefining german shorthand "|
 Package babel Info: Redefining german shorthand "~
 (babel)             in language  on input line 342.
  [8]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 342.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 342.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 372.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 372.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 372.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 372.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 372.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 372.
+ [9]
+Overfull \hbox (12.96231pt too wide) in paragraph at lines 385--385
+[][]\T1/fnc/b/n/12 Input and Out-put Re-si-stan-ces of the Common-Emitter and C
+ommon-Source
+ []
+
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 406.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 406.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 406.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 406.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 406.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 406.
+[10]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 441.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 441.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 441.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 441.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 441.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 441.
+ [11]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 471.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 471.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 471.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 471.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 471.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 471.
+ [12]
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 483.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 483.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 483.
+Package babel Info: Redefining german shorthand "f
+(babel)             in language  on input line 483.
+Package babel Info: Redefining german shorthand "|
+(babel)             in language  on input line 483.
+Package babel Info: Redefining german shorthand "~
+(babel)             in language  on input line 483.
+ [13]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 483.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 483.
  (./MCD_CH13.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 342.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 342.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 483.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 483.
 Package rerunfilecheck Info: File `MCD_CH13.out' has not changed.
 (rerunfilecheck)             Checksum: C4F9460C64117CC477C77992ECABE895;379.
 
@@ -1935,13 +2005,13 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 40380 strings out of 492649
- 858466 string characters out of 6129623
- 1117539 words of memory out of 5000000
+ 40435 strings out of 492649
+ 859025 string characters out of 6129623
+ 1124540 words of memory out of 5000000
  43566 multiletter control sequences out of 15000+600000
- 631672 words of font info for 284 fonts, out of 8000000 for 9000
+ 632734 words of font info for 302 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,19n,56p,10363b,1003s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,23n,56p,10363b,1003s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/base/8r.enc}{/usr/local/t
 exlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}</usr/local/texlive/2018/te
 xmf-dist/fonts/type1/public/fourier/fourier-mex.pfb></usr/local/texlive/2018/te
@@ -1953,10 +2023,10 @@ nts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
 1/urw/ncntrsbk/uncb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/n
 cntrsbk/uncr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/ncntrsbk
 /uncri8a.pfb>
-Output written on MCD_CH13.pdf (9 pages, 115248 bytes).
+Output written on MCD_CH13.pdf (14 pages, 130287 bytes).
 PDF statistics:
- 159 PDF objects out of 1000 (max. 8388607)
- 137 compressed objects within 2 object streams
- 52 named destinations out of 1000 (max. 500000)
+ 209 PDF objects out of 1000 (max. 8388607)
+ 182 compressed objects within 2 object streams
+ 80 named destinations out of 1000 (max. 500000)
  36909 words of extra memory for PDF output out of 42996 (max. 10000000)
 

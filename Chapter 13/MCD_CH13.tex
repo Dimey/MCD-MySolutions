@@ -319,7 +319,9 @@ Um den Text hier klein zu halten, führe ich die vorgegebenen Werte hier nicht e
 	I_{D2} &= \SI{129.5}{\micro\ampere}
 	\end{aligned}
 	\end{equation}
-	Schaut man sich beide Lösungen an, kommt man schnell auf den Schluss, dass lediglich $I_{D2}$ die korrekte Lösung sein kann.
+	Schaut man sich beide Lösungen an, kommt man schnell auf den Schluss, dass lediglich $I_{D2}$ die korrekte Lösung sein kann.\\
+	Da zu einem späteren Zeitpunkt in diesem Problemset die Spannung $V_{DS}$ benötigt wird, können wir diese noch bestimmen:
+	\[ V_{DS} = V_{DD} - R_DI_D - R_4I_D = \SI{10}{\volt} - (\SI{43}{\kilo\ohm})(\SI{129.5}{\micro\ampere}) - (\SI{20}{\kilo\ohm})(\SI{129.5}{\micro\ampere}) = \SI{1.84}{\volt} \]
 	
 	\item \textbf{AC-Analyse}: Mit dem Arbeitsstrom $I_D$ kann nun die Transkonduktanz bestimmt werden.
 	\[ g_m=\sqrt{2K_nI_D} = \sqrt{2(\SI{0.45}{\milli\ampere\per\square\volt})(\SI{129.5}{\micro\ampere})} = \SI{0.34}{\milli\siemens} \]
@@ -338,5 +340,144 @@ Um den Text hier klein zu halten, führe ich die vorgegebenen Werte hier nicht e
 \subsubsection*{13.101}
 Das Gleiche wie in der vorherigen Aufgabe, nur dass uns dieses Mal die DC-Analyse erspart bleibt! Wir können also die Transkonduktanz direkt mit
 \[ g_m = \sqrt{2K_nI_D} = \sqrt{(2)(\SI{450}{\micro\ampere\per\square\volt})(\SI{100}{\micro\ampere})} = \SI{0.3}{\milli\siemens} \] 
+angegeben werden.\\
+Da es sich hier prinzipiell um die gleiche Schaltung wie in (13.100) handelt, können wir auch exakt den gleichen Rechenweg anwenden. Deshalb bestimmen wir zunächst den Lastwiderstand $R_L$:
+\[ R_L = r_0||R_D||R_3 = \frac{1}{\lambda I_D} || \SI{50}{\kilo\ohm} || \SI{120}{\kilo\ohm} \approx \SI{33}{\kilo\ohm} \]
+Jetzt kann die CS-Verstärkung folgendermaßen berechnet werden:
+\[ A_v^{CS} = -g_mR_L\frac{R_G}{R_G+R_I} = -(\SI{0.3}{\milli\siemens})(\SI{33}{\kilo\ohm}) \frac{\SI{6.8}{\mega\ohm}}{\SI{6.8}{\mega\ohm} + \SI{100}{\kilo\ohm}} \approx - 9.76\]
+Hinweis: Diese Aufgabe kann auch genauer berechnet werden, wenn noch die Info zu $V_{DS}$ genutzt wird. Dann kann auch beispielsweise die genauere Formel für den Ausgangswiderstand $r_0$ und die Transkonduktanz $g_m = \sqrt{2K_nI_D(1+\lambda V_{DS})}$ verwendet werden.
+
+\subsubsection*{13.102}
+Diese Aufgabe lässt sich leicht lösen, da die einzige Abhängigkeit von $K_n$ herrscht in der Transkonduktanz $g_m$. So können wir einfach den Minimal- und Maximalwert berechnen und anschließend in die Verstärkung-Gleichung einsetzen:
+\begin{equation}
+\begin{aligned}
+g_m^{\text{max}} &= \sqrt{2K_n^{\text{max}}I_D} = \sqrt{2(\SI{700}{\micro\ampere\per\square\volt})(\SI{100}{\micro\ampere})} = \SI{374}{\micro\siemens} \\
+g_m^{\text{min}} &= \sqrt{2K_n^{\text{min}}I_D} = \sqrt{2(\SI{300}{\micro\ampere\per\square\volt})(\SI{100}{\micro\ampere})} = \SI{245}{\micro\siemens} \\
+A_v^{\text{CS, max}} &= -g_m^{\text{max}}R_L\frac{R_G}{R_G+R_I} = -(\SI{374}{\micro\siemens})(\SI{33}{\kilo\ohm})\frac{\SI{6.8}{\mega\ohm}}{\SI{6.8}{\mega\ohm}+\SI{100}{\kilo\ohm}} = -12.16\\
+A_v^{\text{CS, min}} &= -g_m^{\text{min}}R_L\frac{R_G}{R_G+R_I} = -(\SI{245}{\micro\siemens})(\SI{33}{\kilo\ohm})\frac{\SI{6.8}{\mega\ohm}}{\SI{6.8}{\mega\ohm}+\SI{100}{\kilo\ohm}} = -7.97
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.103}
+Die Aufgabe ist äquivalent zu (13.101) – mit gleichem Arbeitspunkt aber mit wesentlich höherer Last. Dieses Mal werden wir allerdings eine genauere Berechnung durchführen Zuerst die Transkonduktanz:
+\[ g_m = \sqrt{2K_nI_D(1+\lambda V_{DS})} = \sqrt{2(\SI{100}{\micro\ampere\per\square\volt})(\SI{10}{\micro\ampere})(1+\SI{0.02}{\per\volt}\SI{5}{\volt})} = \SI{46.9}{\micro\siemens} \] 
+Als zweites den Ausgangswiderstand und der Lastwiderstand:
+\begin{equation} 
+\begin{aligned}
+r_0 &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\frac{1}{\SI{0.02}{\per\volt}}+\SI{5}{\volt}}{\SI{10}{\micro\ampere}} = \SI{5.5}{\mega\ohm}\\
+R_L &= r_0||R_D||R_3 = \SI{5.5}{\mega\ohm} || \SI{560}{\kilo\ohm} || \SI{1.5}{\mega\ohm} \approx \SI{379.6}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+Und zuletzt die Verstärkung:
+\[ A_v^{CS} = -g_mR_L\frac{R_G}{R_G+R_I} = -(\SI{46.9}{\micro\siemens})(\SI{379.6}{\kilo\ohm}) \frac{\SI{10}{\mega\ohm}}{\SI{10}{\mega\ohm} + \SI{100}{\kilo\ohm}} \approx - 17.63 \]
+
+\subsubsection*{13.104}
+Gleicher Aufgabentyp zu (13.101) und (13.103). Keine weiteren Bemerkungen.
+\begin{equation} 
+\begin{aligned}
+g_m &= \sqrt{2K_nI_D(1+\lambda V_{DS})} = \sqrt{2(\SI{1}{\milli\ampere\per\square\volt})(\SI{2}{\milli\ampere})(1+\SI{0.015}{\per\volt}\SI{7.5}{\volt})} = \SI{2.11}{\milli\siemens} \\
+r_0 &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\frac{1}{\SI{0.015}{\per\volt}}+\SI{7.5}{\volt}}{\SI{2}{\milli\ampere}} \approx \SI{37}{\kilo\ohm}\\
+R_L &= r_0||R_D||R_3 = \SI{37}{\kilo\ohm} || \SI{3.9}{\kilo\ohm} || \SI{33}{\kilo\ohm} \approx \SI{3.2}{\kilo\ohm} \\
+A_v^{CS} &= -g_mR_L\frac{R_G}{R_G+R_I} = -(\SI{2.11}{\milli\siemens})(\SI{3.2}{\kilo\ohm}) \frac{\SI{1}{\mega\ohm}}{\SI{1}{\mega\ohm} + \SI{10}{\kilo\ohm}} \approx - 6.34
+\end{aligned}
+\end{equation}
+
+\subsection*{Input and Output Resistances of the Common-Emitter and Common-Source Amplifiers}
+\subsubsection*{13.109}
+Berechne für den abgebildeten Schaltplan den Eingangs- und Ausgangswiderstand, wenn der Q-Punkt bei $(\SI{75}{\micro\ampere}, \SI{10}{\volt})$ liegt. Nimm $\beta_0=100$ und $V_A=\SI{75}{\volt}$ an.\\
+Baut man das Kleinsignalmodell des BJT in die Schaltung, kann der Eingangswiderstand schnell gefunden werden. Zuerst die Berechnung des Transistor-Parameters:
+\[ r_{\pi} = \frac{\beta_0V_T}{I_C} = \frac{(100)(\SI{0.025}{\volt})}{\SI{75}{\micro\ampere}} = \SI{33.3}{\kilo\ohm}\]
+Um letztlich die Parallelschaltung lösen zu können:
+\[ R_{\text{in}}^{CE} = R_B || r_{\pi} =  \frac{(\SI{100}{\kilo\ohm})(\SI{33.3}{\kilo\ohm})}{\SI{100}{\kilo\ohm}+\SI{33.3}{\kilo\ohm}} \approx \SI{25}{\kilo\ohm}\]
+Als nächstes folgt die Berechnung des Ausgangswiderstandes. Diese ist ganz einfach, da lediglich in den Ausgang geschaut werden muss. Doch vorher muss noch der Transistor-eigene Ausgangswiderstand $r_{\text{o}}$ berechnet werden:
+\[ r_{\text{o}} = \frac{V_A+V_{CE}}{I_C} = \frac{\SI{75}{\volt} + \SI{10}{\volt}}{\SI{75}{\micro\ampere}} = \SI{1.13}{\mega\ohm} \]
+Nun kann der eigentliche Ausgangswiderstand bestimmt werden:
+\[ R_{\text{out}}^{CE} = R_C || r_{\text{o}} = \frac{(\SI{100}{\kilo\ohm})(\SI{1.13}{\mega\ohm})}{\SI{100}{\kilo\ohm} + \SI{1.13}{\mega\ohm}} \approx \SI{92}{\kilo\ohm}  \]
+
+\subsubsection*{13.110}
+Exakt gleicher Aufgabentypus wie in (13.109). Wir müssen lediglich andere Zahlenwerte einsetzen:
+\begin{equation}
+\begin{aligned}
+r_{\pi} &= \frac{\beta_0V_T}{I_C} = \frac{(75)(\SI{0.025}{\volt})}{\SI{2}{\milli\ampere}} = \SI{937.5}{\ohm} \\
+R_{\text{in}}^{CE} &= R_B || r_{\pi} =  \frac{(\SI{4.7}{\kilo\ohm})(\SI{937.5}{\ohm})}{\SI{4.7}{\kilo\ohm}+\SI{937.5}{\ohm}} \approx \SI{781.6}{\ohm} \\
+r_{\text{o}} &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{50}{\volt} + \SI{7.5}{\volt}}{\SI{2}{\milli\ampere}} = \SI{28.75}{\kilo\ohm} \\
+R_{\text{out}}^{CE} &= R_C || r_{\text{o}} = \frac{(\SI{4.3}{\kilo\ohm})(\SI{28.75}{\kilo\ohm})}{\SI{4.3}{\kilo\ohm} + \SI{28.75}{\kilo\ohm}} \approx \SI{3.74}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.111}
+In Problem (13.59) beläuft sich die Vorwärts-Verstärkung $\beta_0$ in einem Bereich von 60 bis 100. Welche Minimal- und Maximalwerte kann der Eingangs- und Ausgangswiderstand erreichen?\\
+Zuerst muss die Abhängigkeit der Widerstände festgestellt werden. Hierbei stellt sich heraus, dass der Ausgangswiderstand gar nicht von $\beta_0$ abhängig ist und damit einen festen Wert aufweist. Der Transistor-Eingangswiderstand $r_{\pi}$ dagegen ist proportional zu $\beta_0$: $r_{\pi} = \frac{\beta_0V_T}{I_C}$.
+\begin{equation}
+\begin{aligned}
+r_{\pi}^{\text{min}} &= \frac{\beta_0^{\text{min}}V_T}{I_C} = \frac{(60)(\SI{0.025}{\volt})}{\SI{40}{\micro\ampere}} = \SI{37.5}{\kilo\ohm} \\
+r_{\pi}^{\text{max}} &= \frac{\beta_0^{\text{max}}V_T}{I_C} = \frac{(100)(\SI{0.025}{\volt})}{\SI{40}{\micro\ampere}} = \SI{62.5}{\kilo\ohm}
+\end{aligned}
+\end{equation} 
+Nun können die Ausreißer-Werte für den Gesamteingangswiderstand berechnet werden:
+\begin{eqnarray}
+\begin{aligned}
+R_{\text{in}}^{CE\text{, min}} &= R_B || r_{\pi}^{\text{min}} = \frac{(\SI{100}{\kilo\ohm})(\SI{37.5}{\kilo\ohm})}{\SI{100}{\kilo\ohm}+\SI{37.5}{\kilo\ohm}} \approx \SI{27.3}{\kilo\ohm} \\
+R_{\text{in}}^{CE\text{, max}} &= R_B || r_{\pi}^{\text{max}} = \frac{(\SI{100}{\kilo\ohm})(\SI{62.5}{\kilo\ohm})}{\SI{100}{\kilo\ohm}+\SI{62.5}{\kilo\ohm}} \approx \SI{38.5}{\kilo\ohm}
+\end{aligned}
+\end{eqnarray}
+Zu guter Letzt berechnen wir den von $\beta_0$ unabhängigen Ausgangswiderstand:
+\begin{equation}
+\begin{aligned}
+r_{\text{o}} &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{75}{\volt} + \SI{10}{\volt}}{\SI{40}{\micro\ampere}} = \SI{2.125}{\mega\ohm} \\
+R_{\text{out}}^{CE} &= R_C || r_{\text{o}} = \frac{(\SI{62}{\kilo\ohm})(\SI{2.125}{\mega\ohm})}{\SI{62}{\kilo\ohm}+\SI{2.125}{\mega\ohm}} = \SI{60.24}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.112}
+Exakt gleicher Aufgabentypus wie in (13.109). Wir müssen lediglich andere Zahlenwerte einsetzen:
+\begin{equation}
+\begin{aligned}
+r_{\pi} &= \frac{\beta_0V_T}{I_C} = \frac{(40)(\SI{0.025}{\volt})}{\SI{1}{\micro\ampere}} = \SI{1}{\mega\ohm} \\
+R_{\text{in}}^{CE} &= R_B || r_{\pi} =  \frac{(\SI{5}{\mega\ohm})(\SI{1}{\mega\ohm})}{\SI{5}{\mega\ohm}+\SI{1}{\mega\ohm}} \approx \SI{833.3}{\kilo\ohm} \\
+r_{\text{o}} &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{50}{\volt} + \SI{1.5}{\volt}}{\SI{1}{\micro\ampere}} = \SI{51.5}{\mega\ohm} \\
+R_{\text{out}}^{CE} &= R_C || r_{\text{o}} = \frac{(\SI{2}{\mega\ohm})(\SI{51.5}{\mega\ohm})}{\SI{2}{\mega\ohm} + \SI{51.5}{\mega\ohm}} \approx \SI{1.9}{\mega\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.113}
+\textbf{(a)} $5 \times I_C$, $\frac{1}{5} \times R_C,R_B,R_3$ 
+\begin{equation}
+\begin{aligned}
+r_{\pi} &= \frac{\beta_0V_T}{I_C} = \frac{(40)(\SI{0.025}{\volt})}{\SI{5}{\micro\ampere}} = \SI{200}{\kilo\ohm} \\
+R_{\text{in}}^{CE} &= R_B || r_{\pi} =  \frac{(\SI{1}{\mega\ohm})(\SI{200}{\kilo\ohm})}{\SI{1}{\mega\ohm}+\SI{200}{\kilo\ohm}} \approx \SI{166.7}{\kilo\ohm} \\
+r_{\text{o}} &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{50}{\volt} + \SI{1.5}{\volt}}{\SI{5}{\micro\ampere}} = \SI{10.3}{\mega\ohm} \\
+R_{\text{out}}^{CE} &= R_C || r_{\text{o}} = \frac{(\SI{400}{\kilo\ohm})(\SI{10.3}{\mega\ohm})}{\SI{400}{\kilo\ohm} + \SI{10.3}{\mega\ohm}} \approx \SI{385}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+\textbf{(b)} $50 \times I_C$, $\frac{1}{50} \times R_C,R_B,R_3$
+\begin{equation}
+\begin{aligned}
+r_{\pi} &= \frac{\beta_0V_T}{I_C} = \frac{(40)(\SI{0.025}{\volt})}{\SI{50}{\micro\ampere}} = \SI{20}{\kilo\ohm} \\
+R_{\text{in}}^{CE} &= R_B || r_{\pi} =  \frac{(\SI{100}{\kilo\ohm})(\SI{20}{\kilo\ohm})}{\SI{100}{\kilo\ohm}+\SI{20}{\kilo\ohm}} \approx \SI{16.7}{\kilo\ohm} \\
+r_{\text{o}} &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{50}{\volt} + \SI{1.5}{\volt}}{\SI{50}{\micro\ampere}} = \SI{1.03}{\mega\ohm} \\
+R_{\text{out}}^{CE} &= R_C || r_{\text{o}} = \frac{(\SI{40}{\kilo\ohm})(\SI{1.03}{\mega\ohm})}{\SI{40}{\kilo\ohm} + \SI{1.03}{\mega\ohm}} \approx \SI{38.5}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.114}
+Um Eingangs- und Ausgangswiderstand berechnen zu können, benötigen wir den in Aufgabe (13.100) berechneten Arbeitspunkt: $(\SI{129.5}{\micro\ampere},\SI{1.84}{\volt})$. Nun arbeiten wir mit den gewohnten Gleichungen aus vorherigen Aufgaben:
+\begin{equation}
+\begin{aligned}
+R_{\text{in}}^{CS} &= R_1 || R_2 = \frac{(\SI{430}{\kilo\ohm})(\SI{560}{\kilo\ohm})}{\SI{430}{\kilo\ohm} + \SI{560}{\kilo\ohm}} \approx \SI{243}{\kilo\ohm} \\
+r_{\text{o}} &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\SI{77}{\volt}}{\SI{129.5}{\micro\ampere}} = \SI{594.8}{\kilo\ohm} \\
+R_{\text{out}}^{CE} &= R_D || r_{\text{o}} = \frac{(\SI{43}{\kilo\ohm})(\SI{594.8}{\kilo\ohm})}{\SI{43}{\kilo\ohm} + \SI{594.8}{\kilo\ohm}} = \SI{40.1}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.115}
+Um Eingangs- und Ausgangswiderstand berechnen zu können, benötigen wir den in Aufgabe (13.101) angegebenen Arbeitspunkt: $(\SI{100}{\micro\ampere},\SI{5}{\volt})$. Nun arbeiten wir mit den gewohnten Gleichungen aus vorherigen Aufgaben:
+\begin{equation}
+\begin{aligned}
+R_{\text{in}}^{CS} &= R_G = \SI{6.8}{\mega\ohm}\\
+r_{\text{o}} &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\SI{55}{\volt}}{\SI{100}{\micro\ampere}} = \SI{550}{\kilo\ohm} \\
+R_{\text{out}}^{CE} &= R_D || r_{\text{o}} = \frac{(\SI{50}{\kilo\ohm})(\SI{550}{\kilo\ohm})}{\SI{50}{\kilo\ohm} + \SI{550}{\kilo\ohm}} = \SI{45.8}{\kilo\ohm}
+\end{aligned}
+\end{equation}
 
 \end{document}
