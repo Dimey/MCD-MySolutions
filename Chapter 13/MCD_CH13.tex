@@ -87,9 +87,6 @@
 \def\tagform@#1{\maketag@@@{(\ignorespaces\textcolor{red}{#1}\unskip\@@italiccorr)}}
 \renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
 \makeatother
-\usepackage{hyperref}
-\hypersetup{colorlinks=true}
-\usepackage{hypcap}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% PREPARE TITLE
@@ -479,5 +476,206 @@ r_{\text{o}} &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\SI{55}{\volt}}{\SI
 R_{\text{out}}^{CE} &= R_D || r_{\text{o}} = \frac{(\SI{50}{\kilo\ohm})(\SI{550}{\kilo\ohm})}{\SI{50}{\kilo\ohm} + \SI{550}{\kilo\ohm}} = \SI{45.8}{\kilo\ohm}
 \end{aligned}
 \end{equation}
+
+\subsubsection*{13.116}
+Wie bereits in der vorherigen Aufgabe (13.115) ersichtlich, sind weder Eingangs- noch Ausgangswiderstand von $K_n$ abhängig. Dementsprechend gelten die gleichen Ergebnisse wie in (13.115).
+
+\subsubsection*{13.117}
+Der Eingangswiderstand kann für einen CS-Verstärker sehr schnell berechnet werden:
+\[ R_{\text{in}}^{CS} = R_G = \SI{10}{\mega\ohm} \]
+Der Ausgangswiderstand kann wie in den vorherigen Aufgaben folgendermaßen berechnet werden:
+\begin{equation}
+\begin{aligned}
+r_{\text{o}} &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\SI{55}{\volt}}{\SI{10}{\micro\ampere}} = \SI{5.5}{\mega\ohm} \\
+R_{\text{out}}^{CE} &= R_D || r_{\text{o}} = \frac{(\SI{560}{\kilo\ohm})(\SI{5.5}{\mega\ohm})}{\SI{560}{\kilo\ohm} + \SI{5.5}{\mega\ohm}} = \SI{508.25}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.118}
+\begin{equation}
+\begin{aligned}
+R_{\text{in}}^{CS} &= R_G = \SI{1}{\mega\ohm}\\
+r_{\text{o}} &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\SI{74.2}{\volt}}{\SI{2}{\milli\ampere}} = \SI{37}{\kilo\ohm} \\
+R_{\text{out}}^{CE} &= R_D || r_{\text{o}} = \frac{(\SI{3.9}{\kilo\ohm})(\SI{37}{\kilo\ohm})}{\SI{3.9}{\kilo\ohm} + \SI{37}{\kilo\ohm}} = \SI{3.5}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.119}
+Neuer Aufgabentyp: Berechne das Thévenin-Äquivalent der Schaltung aus Prob. 13.59.\\
+Dazu ersetzen wir den Transistor durch sein Kleinsignalmodell und errechnen, wie viel der Eingangsspannung an den Widerständen am Ausgang ankommen. 
+\begin{equation}
+	\begin{aligned}
+	g_m &= \frac{I_C}{V_T} = \frac{\SI{40}{\micro\ampere}}{\SI{0.025}{\volt}} = \SI{1.6}{\milli\siemens} \\
+	r_{\pi} &= \frac{\beta_0}{g_m} = \frac{100}{\SI{1.6}{\milli\siemens}} = \SI{62.5}{\kilo\ohm} \\
+	r_o &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{75}{\volt} + \SI{10}{\volt}}{\SI{40}{\micro\ampere}} = \SI{2.125}{\mega\ohm} \\
+	v_{\text{th}} &= -g_mv_{be}r_o||R_C = -g_mv_i\frac{R_B||R_{\pi}}{R_I + R_B||R_{\pi}}r_o||R_C = -94.4v_i
+	\end{aligned}
+\end{equation}
+Zum Schluss schaut man in die Ausgangsports und berechnet den Ersatzwiderstand:
+\[ R_{th} = R_C||r_o = \SI{60.2}{\kilo\ohm} \]
+
+\subsubsection*{13.120}
+Nochmal eine Thévenin-Darstellung für Aufgabe 13.61.
+\begin{equation}
+\begin{aligned}
+g_m &= \frac{I_C}{V_T} = \frac{\SI{2}{\milli\ampere}}{\SI{0.025}{\volt}} = \SI{80}{\milli\siemens} \\
+r_{\pi} &= \frac{\beta_0}{g_m} = \frac{75}{\SI{80}{\milli\siemens}} = \SI{937.5}{\ohm} \\
+r_o &= \frac{V_A+V_{CE}}{I_C} = \frac{\SI{50}{\volt} + \SI{7.5}{\volt}}{\SI{2}{\milli\ampere}} = \SI{28.75}{\kilo\ohm} \\
+v_{\text{th}} &= -g_mv_{be}r_o||R_C = -g_mv_i\frac{R_B||R_{\pi}}{R_I + R_B||R_{\pi}}r_o||R_C = -303.8v_i \\
+R_{th} &= R_C||r_o = \SI{4039.6}{\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.121}
+Nochmal eine Thévenin-Darstellung für Aufgabe 13.103.
+\begin{equation}
+\begin{aligned}
+g_m &= \sqrt{2K_nI_D(1+\lambda V_{DS})} = \sqrt{2(\SI{100}{\micro\ampere\per\square\volt})(\SI{10}{\micro\ampere})(1+(\SI{0.02}{\per\volt})(\SI{5}{\volt})} = \SI{46.9}{\micro\siemens} \\
+r_o &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\frac{1}{\SI{0.02}{\per\volt}}+\SI{5}{\volt}}{\SI{10}{\micro\ampere}} = \SI{5.5}{\mega\ohm} \\
+v_{\text{th}} &= -g_mv_{gs}r_o||R_D = -g_mv_i\frac{R_G}{R_I + R_G}r_o||R_D = -23.6v_i \\
+R_{th} &= R_D||r_o = \SI{508.25}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.122}
+Nochmal eine Thévenin-Darstellung für Aufgabe 13.101.
+\begin{equation}
+\begin{aligned}
+g_m &= \sqrt{2K_nI_D(1+\lambda V_{DS})} = \sqrt{2(\SI{450}{\micro\ampere\per\square\volt})(\SI{100}{\micro\ampere})(1+(\SI{0.02}{\per\volt})(\SI{5}{\volt})} = \SI{314.6}{\micro\siemens} \\
+r_o &= \frac{\frac{1}{\lambda}+V_{DS}}{I_D} = \frac{\frac{1}{\SI{0.02}{\per\volt}}+\SI{5}{\volt}}{\SI{100}{\micro\ampere}} = \SI{550}{\kilo\ohm} \\
+v_{\text{th}} &= -g_mv_{gs}r_o||R_D = -g_mv_i\frac{R_G}{R_I + R_G}r_o||R_D = -14.2v_i \\
+R_{th} &= R_D||r_o = \SI{45.8}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsection{Common-Emitter and Common-Source Amplifier Summary}
+\subsubsection*{13.123}
+\paragraph{(a)} Dieser Aufgabentyp kombiniert alle vorherigen Aufgaben in einer: Es sollen Verstärkung, Eingangs- und Ausgangswiderstand berechnet werden. Um nochmal alles frisch im Kopf aufzubauen und sich von alten Routinen zu lösen, wird für die Lösung dieser Aufgabe ein kompletter Hergang aufgezeigt.\\
+Im ersten Schritt berechnen wir den DC-Arbeitspunkt. Mit diesem können alle Kleinsignalparameter de Transistors berechnet werden. Mit dem Kleinsignalmodell lassen sich Verstärkung, Eingangs- und Ausgangswiderstand berechnen.\\
+\begin{enumerate}
+	\item \textbf{Bestimmung des DC-Arbeitspunktes}\\
+	Wir beginnen mit einer einfachen Maschengleichung am Eingang:
+	\begin{equation}
+	\begin{aligned}
+	&&0 &= I_B(\SI{100}{\kilo\ohm}) + V_{BE} + I_E(\SI{16}{\kilo\ohm}) - \SI{5}{\volt} \\
+	&\Leftrightarrow &I_B  &= -\frac{\SI{0.7}{\volt} - \SI{5}{\volt}}{\SI{100}{\kilo\ohm} + (1+\beta_f)(\SI{16}{\kilo\ohm})} \\
+	&&&= \SI{3.72}{\micro\ampere}
+	\end{aligned}
+	\end{equation}
+	Mit dem berechneten Basisstrom können wir den vollständigen Arbeitspunkt bestimmen:
+	\begin{equation}
+	\begin{aligned}
+	I_C &= \beta_fI_B = (65)(\SI{3.72}{\micro\ampere}) = \SI{241.78}{\micro\ampere}\\
+	V_{CE} &= \SI{10}{\volt} - I_C(\SI{10}{\kilo\ohm}) - I_E(\SI{16}{\kilo\ohm}) \\
+	       &= \SI{3.65}{\volt}
+	\end{aligned}
+	\end{equation}
+	Damit lautet der Arbeitspunkt (\SI{241.78}{\micro\ampere}, \SI{3.65}{\volt}).
+	
+	\item \textbf{Bestimmung der Kleinsignalparameter}\\
+	Um das Kleinsignalmodell benutzen zu können, müssen noch Größen der Bauteile und die Transkonduktanz berechnet werden.
+	\begin{equation}
+	\begin{aligned}
+	   g_m &= \frac{I_C}{V_T} = \frac{\SI{241.78}{\micro\ampere}}{\SI{0.025}{\volt}} = \SI{9.67}{\milli\siemens} \\
+	   r_{\pi} &= \frac{\beta_0}{g_m} = \frac{65}{\SI{9.67}{\milli\siemens}} = \SI{6721}{\ohm} \\
+	   r_o &= \frac{V_A + V_{CE}}{I_C} = \frac{\SI{53.65}{\volt}}{\SI{241.78}{\micro\ampere}} = \SI{221.9}{\kilo\ohm}
+	\end{aligned}
+	\end{equation}
+	\item \textbf{Bestimmung der Verstärkung} \\
+	Die Spannungsverstärkung bestimmen wir über mehrere Spannungsteiler und das Ohm'sche Gesetz.
+	\begin{equation}
+	\begin{aligned}
+	  v_{be} &= v_i\frac{\SI{10}{\kilo\ohm}||r_{\pi}}{\SI{330}{\ohm} + \SI{10}{\kilo\ohm}||r_{\pi}} = 0.924v_i \\
+	  A_v^{CS} &= - \frac{v_{be}}{v_i}g_mr_o||\SI{10}{\kilo\ohm}||\SI{220}{\kilo\ohm} = -(0.924)(\SI{9.67}{\milli\siemens})(\SI{9169.9}{\ohm}) = -81.9
+	\end{aligned}
+	\end{equation}
+	
+	\item \textbf{Berechnung von Eingangs- und Ausgangswiderstand}
+	\begin{equation}
+	\begin{aligned}
+	  R_{\text{in}} &= (\SI{100}{\kilo\ohm})||r_{\pi} = \SI{6297.7}{\ohm}\\
+	  R_{\text{out}} &= (\SI{10}{\kilo\ohm})||r_o = \SI{9568.78}{\ohm}
+	\end{aligned}
+	\end{equation}
+\end{enumerate}
+
+\paragraph{(b)} Nun folgt die Repräsentation als Thévenin-Ersatzschaltung. Dazu legen wir die Ausgangspins offen und schauen, welcher Widerstand uns dort erwartet.
+\[ R_{th} = r_o||\SI{10}{\kilo\ohm}||\SI{220}{\kilo\ohm} = \SI{9169.9}{\ohm} \]
+Jetzt benötigen wir nur die an den offenen Pins anliegende Spannung:
+\[ V_{th} = v_{be}g_mr_o||\SI{10}{\kilo\ohm} = -85.5v_i \]
+
+\paragraph{(c)} Da wir in (b) bereits die Thévenin-Größen berechnet haben, ist Norton ein Selbstläufer:
+\[ I_{th} = \frac{V_{th}}{R_{th}} = \frac{-85.5v_i}{\SI{9169.9}{\ohm}} \]
+
+\subsubsection*{13.125}
+Die Bias-Widerstände sind in dieser Aufgabe um den Faktor 10 angehoben worden – was die auftretenden Ströme um einen Faktor 10 verkleinert. Welche Auswirkungen hat das auf die Verstärkung und den Eingangs- und Ausgangswiderstand?
+\begin{equation}
+\begin{aligned}
+  I_B  &= -\frac{\SI{0.7}{\volt} - \SI{5}{\volt}}{\SI{1}{\mega\ohm} + (1+\beta_f)(\SI{160}{\kilo\ohm})} = \SI{371.97}{\nano\ampere} \\
+  I_C &= \beta_fI_B = (65)(\SI{371.97}{\nano\ampere}) = \SI{24.18}{\micro\ampere}\\
+  V_{CE} &= \SI{10}{\volt} - I_C(\SI{100}{\kilo\ohm}) - I_E(\SI{160}{\kilo\ohm}) = \SI{3.65}{\volt} \\
+  g_m &= \frac{I_C}{V_T} = \frac{\SI{24.18}{\micro\ampere}}{\SI{0.025}{\volt}} = \SI{0.967}{\milli\siemens} \\
+  r_{\pi} &= \frac{\beta_0}{g_m} = \frac{65}{\SI{0.967}{\milli\siemens}} = \SI{67.2}{\kilo\ohm} \\
+  r_o &= \frac{V_A + V_{CE}}{I_C} = \frac{\SI{53.65}{\volt}}{\SI{24.18}{\micro\ampere}} = \SI{2.22}{\mega\ohm} \\
+  v_{be} &= v_i\frac{\SI{1}{\mega\ohm}||r_{\pi}}{\SI{330}{\ohm} + \SI{1}{\mega\ohm}||r_{\pi}} = 0.995v_i \\
+  A_v^{CS} &= - \frac{v_{be}}{v_i}g_mr_o||\SI{100}{\kilo\ohm}||\SI{220}{\kilo\ohm} = -(0.995)(\SI{0.967}{\milli\siemens})(\SI{66.7}{\kilo\ohm}) = -64.18 \\
+  R_{\text{in}} &= (\SI{1}{\mega\ohm})||r_{\pi} = \SI{62.97}{\kilo\ohm}\\
+  R_{\text{out}} &= (\SI{100}{\kilo\ohm})||r_o = \SI{95.69}{\kilo\ohm}
+\end{aligned}
+\end{equation}
+
+\subsection{Amplifier Power and Signal Range}
+\subsubsection*{13.129}
+In dieser Aufgabe soll der Energieverbrauch in jedem einzelnen Bauteil der Schaltung Fig. 13.40(a) berechnet werden bei $\beta_f = 75$.\\
+Um die Leistung zu berechnen, müssen vorher alle Einzelströme berechnet werden. Das linke Steuernetzwerk wird dazu folgendermaßen vereinfacht:
+\[ V_{th} = V_{CC}\frac{R_1}{R_1 + R_2} = \frac{96}{23}\,\text{V} \quad \quad R_{th} = \frac{R_1R_2}{R_1+R_2} = \SI{104.3}{\kilo\ohm} \]
+Anschließend kann über die Maschengleichung der Basisstrom und damit auch Kollektor- und Emitterstrom berechnet werden:
+\[ I_B = \frac{V_{th} - V_{BE}}{R_{th} + (\beta_f+1)R_E} = \SI{3.18}{\micro\ampere} \qquad I_C=\beta_f I_B = \SI{238.5}{\micro\ampere} \qquad I_E=(\beta_f + 1) I_B = \SI{241.7}{\micro\ampere} \]
+Nun berechnen wir die Leistungsabgabe in den rechten Widerständen:
+\[ P_{R_C} = I_C^2R_C = \SI{1.25}{\milli\watt} \qquad P_{R_E} = I_E^2R_E = \SI{0.76}{\milli\watt} \]
+Um nun die fehlenden Leistungen in den anderen beiden Widerständen zu berechnen, scheint die Berechnung der Spannung an der Basis $V_B$ hilfreich zu sein:
+\[ V_B = I_ER_E + V_{BE} = \SI{3.84}{\volt} \]
+Es folgt nun also für die Widerstände $R_1$ und $R_2$:
+\[ P_{R_1} = \frac{V_B^2}{R_1} = \SI{92.16}{\micro\watt} \qquad P_{R_2} = \frac{(V_{CC}-V_B)^2}{R_2} = \SI{0.222}{\milli\watt} \]
+Als letztes folgt die Berechnung der Leistung in den Diodenübergängen:
+\[ P_D = V_{CE}I_C + V_{BE}I_B = (\SI{3.61}{\volt})(\SI{238.5}{\micro\ampere}) + (\SI{0.7}{\volt})(\SI{3.18}{\micro\ampere}) = \SI{0.86}{\milli\watt} \]
+In der Summe ergibt das eine Leistungsaufnahme von $P_S = \SI{3.18}{\milli\watt}$. Vergleicht man dazu die Gesamtleistung, welche Strom- und Spannungseinspeisung ergibt
+\[ P_S^{\text{Sources}} = V_{CC}(I_C+I_2) = \SI{3.19}{\milli\watt}, \]
+stellen wir eine gute Übereinkunft fest.
+
+\subsubsection*{13.130}
+Gleicher Aufgabentyp wie in (13.129) mit dem Unterschied dass es sich dieses Mal um einen Feldeffekttransistor handelt. Da hier kein $K_n$ gegeben ist, nehmen wir einfach die vorgegebenen Werte für den Arbeitspunkt: $(\SI{241}{\micro\ampere}, \SI{3.81}{\volt})$. Ebenfalls einfach zu bestimmen ist der zweite Teilstrom $I_2 = \frac{V_{DD}}{R_1+R_2} = \SI{3.24}{\micro\ampere}$. Nun können die Leistungen zügig berechnet werden:
+\begin{equation}
+\begin{aligned}
+  P_{R_D} &= I_D^2R_D = \SI{1.28}{\milli\watt} \qquad &P_{R_S} &= I_D^2R_S = \SI{0.7}{\milli\watt} \\
+  P_{R_1} &= \frac{V_G^2}{R_1} = \SI{15.78}{\micro\watt} \qquad &P_{R_2} &= \frac{(V_{CC}-V_G)^2}{R_2} = \SI{23.14}{\micro\watt} \\
+  P_D &= V_{DS}I_D = \SI{0.92}{\milli\ampere} \qquad &P_S &= \SI{2.94}{\milli\watt} \\
+  P_S^{\text{Sources}} &= V_{DD}(I_D+I_2) = \SI{2.93}{\milli\watt}
+\end{aligned}
+\end{equation}
+
+\subsubsection*{13.131 - 13.135}
+Aufgrund der Äquivalenz der Aufgaben, wird die Lösung hier nicht aufgeführt.
+
+\subsubsection*{13.136}
+Zuerst rufen wir uns die Kleinsignalbedingung für den Kollektorstrom ins Gedächtnis (Gleichung 13.41 Textbuch):
+\[ |i_c| \leq 0.2I_C \]
+Da $I_C = \frac{V_{CC}}{3R_C}$ gilt, können wir durch Substitution folgenden Ausdruck aufschreiben:
+\[ i_c \leq 0.2 \frac{V_{CC}}{3R_C} \Leftrightarrow v_c \leq 0.2 \frac{V_{CC}}{3} = \frac{V_{CC}}{15} \]
+
+\subsubsection*{13.137}
+Zuerst schreiben beide Kleinsignalbedingungen auf (Gleichung 13.72 und 13.73):
+\[ v_{gs} \leq 0.2(V_{GS} - V_{TN}) \qquad i_d \leq 0.4I_D \]
+Den Arbeitsstrom können wir über $ I_D = \frac{K_n}{2}(V_{GS} - V_{TN})^2 = \SI{0.39}{\milli\ampere} $ berechnen. Das Limit für die Quelle beträgt
+\[ |v_I| = |v_{gs}| \leq 0.2(0-(-\SI{1.25}{\volt})) = \SI{0.25}{\volt}. \]
+Jetzt wird es knifflig. Wir erstellen für das Schaltbild einen AC-Ersatzschaltplan, vernachlässigen $ r_o $ und ersetzen $ g_mv_{gs} $ mit $ i_d $. Durch diese Substitutionen erhalten wir:
+\[ v_{ds} = i_dR_D = 0.4(\SI{0.39}{\milli\ampere})(\SI{15}{\kilo\ohm}) = \SI{2.34}{\volt} \]
+Zusätzlich muss für den Sättigungsbereich auch folgende Gleichung erfüllt sein:
+\[ V_{DS} \geq v_{gs} - V_{TN} = \SI{1.5}{\volt} \]
+Die Mindestversorgung soll mindestens
+\[ V_{DD} \geq \SI{1.5}{\volt} + \SI{2.34}{\volt} + (\SI{0.39}{\milli\ampere})(\SI{15}{\kilo\ohm}) = \SI{9.69}{\volt} \] 
+betragen.
+
+\subsubsection*{13.138}
 
 \end{document}
