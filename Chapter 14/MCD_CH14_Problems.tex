@@ -1,0 +1,204 @@
+\documentclass[11pt,a4paper,titlepage]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{lipsum}
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm, fouriernc, mathtools}
+\usepackage{microtype} %improves the spacing between words and letters
+
+\usepackage{graphicx}
+\graphicspath{{./pics/}}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{wasysym}
+\usepackage{color, colortbl}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLOR DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{MyColor1}{rgb}{0.65,0.165,0.165} %mix personal color
+\newcommand{\textb}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blue}{\color{MyColor1} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blueb}{\color{MyColor1} \usefont{OT1}{lmss}{b}{n}}
+\newcommand{\red}{\color{LightCoral} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\green}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS AND COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    SECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage{sectsty}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%set section/subsections HEADINGS font and color
+\sectionfont{\color{MyColor1}}  % sets colour of sections
+\subsectionfont{\color{MyColor1}}  % sets colour of sections
+
+%set section enumerator to arabic number (see footnotes markings alternatives)
+\renewcommand\thesection{\arabic{section}} %define sections numbering
+\renewcommand\thesubsection{\thesection.\arabic{subsection}} %subsec.num.
+
+%define new section style
+\newcommand{\mysection}{
+	\titleformat{\section} [runin] {\usefont{OT1}{lmss}{b}{n}\color{MyColor1}} 
+	{\thesection} {3pt} {} } 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		CAPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%\captionsetup[figure]{labelfont={color=Black}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		!!!EQUATION (ARRAY) --> USING ALIGN INSTEAD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%using amsmath package to redefine eq. numeration (1.1, 1.2, ...) 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+%set box background to grey in align environment 
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@Aboxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\patchcmd{\@boxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DESIGN CIRCUITS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[siunitx, american, smartlabels, cute inductors, europeanvoltages]{circuitikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\makeatletter
+\let\reftagform@=\tagform@
+\def\tagform@#1{\maketag@@@{(\ignorespaces\textcolor{red}{#1}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREPARE TITLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\blue MICROELECTRONIC CIRCUIT DESIGN \\	\blueb Chapter 14 \\ Single-Transistor Amplifiers \\ Solution Manual}
+\author{Dimitri Haas}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\begin{document}
+\maketitle
+\setcounter{section}{14}
+\subsection{Amplifier Classification}
+\subsubsection*{14.1}
+Zeichne das AC-Ersatzschaltbild und ordne folgenden Konfigurationen zu: C-S, C-G, C-D, C-E, C-B, C-C und unnütz.\\
+\textit{Die Zeichnungen erfolgen zunächst auf Papier mit Stift und werden alsbald nachgetragen mithilfe von Circuitz.}
+\paragraph{(a)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(b)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(c)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(d)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(e)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(f)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(g)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(h)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(i)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(j)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(k)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(l)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(m)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(n)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(o)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(p)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+\paragraph{(q)} Common-Collector. Eingang an der Base und Ausgang am Emitter.
+
+\subsubsection*{14.2}
+
+\subsubsection*{14.3}
+
+\subsubsection*{14.4}
+
+\subsubsection*{14.5}
+
+\subsubsection*{14.6}
+
+\subsubsection*{14.7}
+
+\subsubsection*{14.8}
+
+\subsubsection*{14.9}
+
+\subsubsection*{14.10}
+
+\subsubsection*{14.11}
+
+\subsubsection*{14.12}
+
+\subsubsection*{14.13}
+
+\subsubsection*{14.14}
+
+\subsubsection*{14.15}
+
+\subsection{Inverting Amplifiers – Common-Emitter/Common-Source Circuits}
+
+\subsubsection*{14.16}
+
+\subsubsection*{14.17}
+
+\subsubsection*{14.18}
+
+\subsubsection*{14.19}
+
+\subsubsection*{14.20}
+
+\subsubsection*{14.21}
+
+\subsubsection*{14.22}
+
+\subsubsection*{14.23}
+
+\subsubsection*{14.24}
+
+\subsubsection*{14.25}
+
+\subsubsection*{14.26}
+
+\subsubsection*{14.27}
+
+\subsubsection*{14.28}
+
+\subsection{Follower Circuits – Common-Collector/Common-Drain Amplifiers}
+
+\subsubsection*{14.29}
+
+\subsubsection*{14.30}
+
+\subsubsection*{14.31}
+
+\subsubsection*{14.32}
+
+\subsubsection*{14.33}
+
+\subsubsection*{14.34}
+
+\subsubsection*{14.35}
+
+\subsubsection*{14.36}
+
+\subsubsection*{14.37}
+
+\subsubsection*{14.38}
+
+\end{document}

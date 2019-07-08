@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.4)  17 JUN 2019 20:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.3.4)  8 JUL 2019 12:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1697,7 +1697,7 @@ LaTeX Font Warning: Size substitutions with differences
 Here is how much of TeX's memory you used:
  37030 strings out of 492649
  807023 string characters out of 6129623
- 1041674 words of memory out of 5000000
+ 1041757 words of memory out of 5000000
  40251 multiletter control sequences out of 15000+600000
  633088 words of font info for 308 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1713,7 +1713,7 @@ nts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type
 1/urw/ncntrsbk/uncb8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/n
 cntrsbk/uncr8a.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/urw/ncntrsbk
 /uncri8a.pfb>
-Output written on MCD_CH13.pdf (20 pages, 146363 bytes).
+Output written on MCD_CH13.pdf (20 pages, 151350 bytes).
 PDF statistics:
  110 PDF objects out of 1000 (max. 8388607)
  78 compressed objects within 1 object stream

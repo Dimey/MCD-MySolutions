@@ -1,0 +1,357 @@
+\documentclass[11pt,a4paper,titlepage]{article}
+\usepackage[a4paper]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+\usepackage{lipsum}
+
+\usepackage{amsmath, amssymb, amsfonts, amsthm, fouriernc, mathtools}
+\usepackage{microtype} %improves the spacing between words and letters
+
+\usepackage{graphicx}
+\graphicspath{{./pics/}}
+
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{wasysym}
+\usepackage{color, colortbl}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% COLOR DEFINITIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[svgnames]{xcolor} % Enabling mixing colors and color's call by 'svgnames'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{MyColor1}{rgb}{0.2,0.4,0.6} %mix personal color
+\newcommand{\textb}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blue}{\color{MyColor1} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\blueb}{\color{MyColor1} \usefont{OT1}{lmss}{b}{n}}
+\newcommand{\red}{\color{LightCoral} \usefont{OT1}{lmss}{m}{n}}
+\newcommand{\green}{\color{Black} \usefont{OT1}{lmss}{m}{n}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FONTS AND COLORS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%    SECTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{titlesec}
+\usepackage{sectsty}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%set section/subsections HEADINGS font and color
+\sectionfont{\color{MyColor1}}  % sets colour of sections
+\subsectionfont{\color{MyColor1}}  % sets colour of sections
+
+%set section enumerator to arabic number (see footnotes markings alternatives)
+\renewcommand\thesection{\arabic{section}} %define sections numbering
+\renewcommand\thesubsection{\thesection.\arabic{subsection}} %subsec.num.
+
+%define new section style
+\newcommand{\mysection}{
+	\titleformat{\section} [runin] {\usefont{OT1}{lmss}{b}{n}\color{MyColor1}} 
+	{\thesection} {3pt} {} } 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		CAPTIONS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{caption}
+\usepackage{subcaption}
+%%%%%%%%%%%%%%%%%%%%%%%%
+%\captionsetup[figure]{labelfont={color=Black}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%		!!!EQUATION (ARRAY) --> USING ALIGN INSTEAD
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%using amsmath package to redefine eq. numeration (1.1, 1.2, ...) 
+%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+%set box background to grey in align environment 
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\makeatletter
+\patchcmd{\@Aboxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\patchcmd{\@boxed}{\boxed{#1#2}}{\colorbox{black!15}{$#1#2$}}{}{}%
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DESIGN CIRCUITS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[siunitx, american, smartlabels, cute inductors, europeanvoltages]{circuitikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\makeatletter
+\let\reftagform@=\tagform@
+\def\tagform@#1{\maketag@@@{(\ignorespaces\textcolor{red}{#1}\unskip\@@italiccorr)}}
+\renewcommand{\eqref}[1]{\textup{\reftagform@{\ref{#1}}}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PREPARE TITLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\blue MICROELECTRONIC CIRCUIT DESIGN \\	\blueb Chapter 14 \\ Single-Transistor Amplifiers \\ Summary}
+\author{Dimitri Haas}
+\date{\today}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\maketitle
+\setcounter{section}{13}
+\section{Single-Transistor Amplifiers}
+\subsection{Amplifier Classification}
+In diesem Kapitel wird festgestellt, dass Transistoren über drei Terminale verfügen, welche auf nur bestimmte Arten genutzt werden können:
+\begin{itemize}
+	\item Gate/Source bzw. Base/Collector: Signalaufnahme
+	\item Drain/Source bzw. Collector/Emitter: Signalentnahme
+\end{itemize}
+Aus dieser Beobachtung resultieren drei Familien von Verstärkern:
+\begin{itemize}
+	\item common-emitter/common-source (C-E/C-S)
+	\item common-collector/common-drain (C-C/C-D)
+	\item common-base/common-gate (C-B/C-G)
+\end{itemize}
+Wichtig anzumerken ist, dass das Resistor-Biasing für alle drei Familien gilt. Lediglich das AC-Äquivalent, und damit oben genannte Charakteristika, wird durch Kuppel- und Bypass-Kondensatoren bestimmt.\\
+Die Aufspaltung des Emitter- bzw. Source-Widerstandes dient der zusätzlichen Flexibilität des Designers. Damit steht ihm ein effektives Mittel zur Verfügung, einen Teil der Verstärkung für einen höheren Eingangs- und  Ausgangswiderstand sowie einen größeren Signalbereich einzutauschen.\\
+\\
+Die vorgestellten Familien haben folgende Eigenschaften:
+\begin{itemize}
+	\item C-E/C-S: Moderate bis hohe Verstärkung, hoher Eingangs- und Ausgangswiderstand
+	\item C-C/C-D: Spannungsverstärkung von annähernd 1, hoher Eingangs- und niedriger Ausgangswiderstand
+	\item C-B/C-G: Ähnliche Verstärkung wie bei C-E/C-S, allerdings mit deutlich geringerem Eingangswiderstand
+\end{itemize} 
+In Tabelle \ref{tab:Kleinsignalparameter} können die fraglichen Kleinsignalparameter nachgeschlagen werden.
+\begin{table}[h!]
+	\caption{Small-Signal Transistor Models}
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		\textbf{Kleinsignalparameter}				&\textbf{BJT} &\textbf{MOSFET}	\\
+		\midrule
+		$g_m$		        &$\frac{I_C}{V_T} \cong 40I_C$				& $\frac{2I_D}{V_{GS} - V_{TN}} \cong \sqrt{2K_nI_D}$ \\
+		$r_{\pi}$		    &$\frac{\beta_o}{g_m}$			& $\infty$ \\
+		$r_o$		        &$\frac{V_A + V_{CE}}{I_C} \cong \frac{V_A}{I_C}$			& $\frac{\frac{1}{\lambda}+V_{DS}}{I_D} \cong \frac{1}{\lambda I_D}$ \\
+		$\beta_o$		    &$g_mr_{\pi}$	&	$\infty$	\\
+		$\mu_f = g_mr_o$	&$\frac{V_A + V_{CE}}{V_T} \cong 40V_A$		& $\frac{2}{\lambda(V_{GS}-V_{TN})} \cong \frac{1}{\lambda}\sqrt{\frac{2K_n}{I_D}}$		\\
+		\bottomrule
+	\end{tabular}
+	\label{tab:Kleinsignalparameter} 
+\end{table}
+
+\subsection{Inverting Amplifiers — Common-Emitter/Common-Source Circuits}
+\subsubsection{The Common-Emitter Amplifier}
+Die Herleitungen für folgende Ausdrücke können dem Text entnommen werden. Sie sind schlüssig und leicht nachzuvollziehen.
+\begin{itemize}
+	\item Terminal Voltage Gain: $A_{vt}^{CE} = - \frac{\beta_oR_L}{r_{\pi}+(\beta_o+1)R_E} \cong \frac{g_mR_L}{1+g_mR_E} \quad$ für $\beta_o \gg 1, \, \beta_o=g_mr_{\pi}$
+	\item Terminal Input Resistance: $R_{iB} = r_{\pi} + (\beta_o + 1)R_E \cong r_{\pi}(1+g_mR_E)$
+	\item Signal Source Voltage Gain: $A_v^{CE} = - \frac{g_mR_L}{1+g_mR_E}\frac{R_B||R_{iB}}{R_I + R_B||R_{iB}}$
+\end{itemize}
+\paragraph{Wichtige Limits und Vereinfachungen} Nimmt man an, dass der Innenwiderstand der Signalquelle Null ist (also $R_I=0$), führt die Variation des Emitter-Widerstandes $R_E$ zu folgenden Beobachtungen:
+\begin{equation} 
+A_v^{CE} \cong \begin{cases} 
+-g_mR_L & \mbox{ für } R_E = 0 \\
+-\frac{R_L}{R_E} & \mbox{ für } g_mR_E \gg 1 \\
+\end{cases}
+\label{eq:AvSimplCE}
+\end{equation}
+Zur Erinnerung: Um das Produkt $g_mRL$ schnell abschätzen zu können, bedient man sich an folgender Faustformel:
+\[ g_mR_L \cong 10V_{CC} \]
+\paragraph{Kleinsignal-Bedingung} Mithilfe des zusätzlichen Emitter-Widerstandes $R_E$ kann mit einer größeren Base-Spannung $v_b$ gearbeitet werden:
+\[ |v_b| \leq \SI{0.005}{\volt}(1+g_mR_E) \]
+\paragraph{Ausgangswiderstand am Kollektor} Im Buch wird empfohlen, sich den folgenden Ausdruck möglichst einzuprägen, da die Herleitung ungemütlich ist (dieser Ausdruck setzt $g_m(R_E||r_{\pi}) \gg 1, \, R_{\text{out}} \gg r_o$ voraus):
+\[ R_{iC} \cong r_o[1+g_m(R_E||r_{\pi})] = r_o + \mu_f(R_E||r_{\pi}) < \beta_or_o\]
+Beachte dabei das gesetzte Limit durch $\beta_or_o$. Der Ausgangswiderstand kann niemals größer sein als dieser Ausdruck.
+\paragraph{Ausgangswiderstandes des gesamten CE-Verstärkers}
+\[ R_{\text{out}}^{CE} = R_C||R_{iC} = R_C||r_o\left(1+\frac{\beta_oR_E}{R_{\text{th}}+r_{\pi}+R_E}\right) \cong R_C \]
+
+\subsubsection{The Common-Source Amplifier}
+Die Herleitungen für folgende Ausdrücke können dem Text entnommen werden. Sie sind schlüssig und leicht nachzuvollziehen.
+\begin{itemize}
+	\item Terminal Voltage Gain: $A_{vt}^{CS} = - \frac{g_mR_L}{1+g_mR_S}$
+	\item Signal Source Voltage Gain: $A_v^{CS} = - \frac{g_mR_L}{1+g_mR_S}\frac{R_G}{R_G + R_I}$
+\end{itemize}
+\paragraph{Wichtige Limits und Vereinfachungen} Nimmt man an, dass der Innenwiderstand der Signalquelle sehr klein ist (also $R_I=0$ bzw. $R_I \ll R_G$), führt die Variation des Source-Widerstandes $R_S$ zu folgenden Beobachtungen:
+\begin{equation} 
+A_{vt}^{CS} \cong \begin{cases} 
+-g_mR_L & \mbox{ für } R_S = 0 \\
+-\frac{R_L}{R_S} & \mbox{ für } g_mR_S \gg 1 \\
+\end{cases}
+\label{eq:AvSimplCS}
+\end{equation}
+\paragraph{Kleinsignal-Bedingung} Mithilfe des zusätzlichen Source-Widerstandes $R_S$ kann mit einer größeren Gate-Spannung $v_g$ gearbeitet werden:
+\[ |v_g| \leq 0.2(V_{GS}-V_{TN})(1+g_mR_S) \]
+\paragraph{Eingangswiderstand}
+Das bekannte Resultat für den Eingangswiderstand gilt nach wie vor:
+\[ R_{\text{in}}^{CS} = R_G||R_{iG} = R_G \]
+\paragraph{Ausgangswiderstandes des gesamten CE-Verstärkers}
+\[ R_{\text{out}}^{CS} = R_D||R_{iD} = R_D||r_o\left( 1+g_mR_S \right) \cong R_D \]
+\paragraph{Zusammenfassung der wichtigsten Zusammenhänge} Das Vorangegangene nochmals zusammengefasst in folgender Tabelle.
+\begin{table}[h!]
+	\caption{Small-Signal Transistor Models}
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		\textbf{Design Parameter}				&\textbf{Common-Emitter} &\textbf{Common-Source}	\\
+		\midrule
+		Terminal Voltage Gain		        &$A_{vt}^{CE}=\frac{v_o}{v_b}=-\frac{g_mR_L}{1+g_mR_E}$	 &$A_{vt}^{CS}=\frac{v_o}{v_g}=-\frac{g_mR_L}{1+g_mR_S}$ \\
+		Signal source voltage gain		    &$A_v^{CE}=\frac{v_o}{v_i}=A_{vt}^{CE}\frac{R_B||R_{iB}}{R_I+R_B||R_{iB}}$&$A_v^{CS}=\frac{v_o}{v_i}=A_{vt}^{CS}\frac{R_G}{R_I+R_G}$ \\
+		Estimate for $g_mR_L$		        &$10(V_{CC}+V_{EE})$&$(V_{DD}+V_{SS})$ \\
+		Input terminal resistance		    &$R_{iB}=r_{\pi}(1+g_mR_E)$	&$R_{iG}=\infty$\\
+		Output terminal resistance		    &$R_{iC}=r_o(1+g_mR_E)$	&$R_{iD}=r_o(1+g_mR_S)$\\
+		Amplifier input resistance	&$R_{\text{in}}^{CE}=R_B||R_{iB}$& $R_{\text{in}}^{CS}=R_G$		\\
+		Amplifier output resistance &$R_{\text{out}}^{CE}=R_C||R_{iC}$&$R_{\text{out}}^{CS}=R_D||R_{iD}$\\
+		Input signal range &$\SI{0.005}{\volt}(1+g_mR_E)$ &$0.2(V_{GS}-V_{TN})(1+g_mR_S)$ \\
+		Terminal current gain &$\beta_o$ &$\infty$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:CE_CS_Design_Summary} 
+\end{table}
+\paragraph{Äquivalente Transistor Präsentation} Um die Analyse zu vereinfachen und auch weiterhin unsere Tabelle (\ref{tab:Kleinsignalparameter}) verwenden zu können, kann der Emitter-Widerstand $R_E$ direkt in den Kleinsignalparametern berücksichtigt werden:
+\[ g'_m=\frac{g_m}{1+g_mR_E} \qquad r'_{\pi}=r_{\pi}(1+g_mR_E) \qquad r'_o=r_o(1+g_mR_E) \]
+
+\subsection{Follower Circuits – Common-Collector/Common-Drain Amplifiers}
+Eine kompakte Zusammenfassung des gesamten Abschnitts in folgender Tabelle abgebildet. Die Gleichungen beziehen sich auf Abb. 14.20 im Buch.
+\begin{table}[h!]
+	\caption{Small-Signal Transistor Models}
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		\textbf{Design Parameter}				&\textbf{Common-Collector} &\textbf{Common-Drain}	\\
+		\midrule
+		Terminal Voltage Gain		        &$A_{vt}^{CC}=\frac{v_o}{v_1}=+\frac{g_mR_L}{1+g_mR_L} \cong 1$	 &$A_{vt}^{CD}=\frac{v_o}{v_1}=-\frac{g_mR_L}{1+g_mR_L} \cong 1$ \\
+		Signal source voltage gain		    &$A_v^{CE}=\frac{v_o}{v_i}=A_{vt}^{CC}\frac{R_B||R_{iB}}{R_I+R_B||R_{iB}}$&$A_v^{CD}=\frac{v_o}{v_i}=A_{vt}^{CD}\frac{R_G}{R_I+R_G}$ \\
+		Estimate for $g_mR_L$		        &$10(V_{CC}+V_{EE})$&$(V_{DD}+V_{SS})$ \\
+		Input terminal resistance		    &$R_{iB}=r_{\pi}(1+g_mR_L)$	&$R_{iG}=\infty$\\
+		Output terminal resistance		    &$R_{iE} \cong \frac{1}{g_m}+\frac{R_{\text{th}}}{\beta_o}$	&$R_{iS}=\frac{1}{g_m}$\\
+		Input signal range &$\SI{0.005}{\volt}(1+g_mR_L)$ &$0.2(V_{GS}-V_{TN})(1+g_mR_L)$ \\
+		Terminal current gain &$\beta_o+1$ &$\infty$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:CC_CD_Design_Summary} 
+\end{table}
+
+\subsection{Noninverting Amplifiers – Common-Base/Common-Gate Circuits}
+Erneut ist eine kompakte Zusammenfassung des gesamten Abschnitts in einer weiteren Tabelle abgebildet. Die Gleichungen beziehen sich auf Abb. 14.26 im Buch.
+\begin{table}[h!]
+	\caption{Small-Signal Transistor Models}
+	\centering
+	\begin{tabular}{ccc}
+		\toprule
+		\textbf{Design Parameter}				&\textbf{Common-Base} &\textbf{Common-Gate}	\\
+		\midrule
+		Terminal Voltage Gain&$A_{vt}^{CB}=\frac{v_o}{v_1}=+g_mR_L$&$A_{vt}^{CG}=\frac{v_o}{v_1}=+g_mR_L$ \\
+		Signal source voltage gain		    &$A_v^{CB}=\frac{v_o}{v_i}=\frac{g_mR_L}{1+g_mR_{\text{th}}}\frac{R_6}{R_I+R_6}$&$A_v^{CG}=\frac{v_o}{v_i}=\frac{g_mR_L}{1+g_mR_{\text{th}}}\frac{R_6}{R_I+R_6}$ \\
+		Input terminal resistance		    &$\frac{1}{g_m}$	&$\frac{1}{g_m}$\\
+		Output terminal resistance		    &$r_o(1+g_mR_{\text{th}})=r_o+\mu_fR_{\text{th}}$	&$r_o(1+g_mR_{\text{th}})=r_o+\mu_fR_{\text{th}}$\\
+		Input signal range &$\SI{0.005}{\volt}(1+g_mR_{\text{th}})$ &$0.2(V_{GS}-V_{TN})(1+g_mR_{\text{th}})$ \\
+		Terminal current gain &$\alpha_o \cong +1$ &$+1$ \\
+		\bottomrule
+	\end{tabular}
+	\label{tab:CB_CG_Design_Summary} 
+\end{table}
+
+\subsection{Amplifier Prototype Review and Comparison}
+Es folgt nun eine Zusammenfassung des vorherigen Abschnitts und mögliche Vereinfachungen.
+\subsubsection{The BJT Amplifiers}
+Wir stellen fest, dass bei vernachlässigbarem Innenwiderstand der Signalquelle folgende Gesamtverstärkung für alle drei BJT-Konfigurationen gilt:
+\[ |A_v| \cong \frac{g_mR_L}{1+g_mR} = \frac{R_L}{\frac{1}{g_m}+R} \]
+sowie
+\[ |v_{be}| \leq \SI{0.005}{\volt}(1+g_mR). \]
+Mit $R$ als externer Widerstand am Emitter: $R_E, R_L$ oder $R_I||R_6$. Für eine gute Abschätzung braucht man sich also lediglich eine Gleichung für die Verstärkung merken.\\
+Die obigen BJT-Spalten lassen sich noch weiter vereinfachen:
+\begin{table}[h!]
+	\caption{Simplified Characteristics of Single BJT Amplifiers}
+	\centering
+	\resizebox{\textwidth}{!}{%
+	\begin{tabular}{ccccc}
+		\toprule
+		\textbf{Design Parameter}	&\textbf{Common-Emitter} &\textbf{Common-Emitter with}&\textbf{Common-} &	\\
+		&\textbf{$R_E=0$} & \textbf{Emitter Resistor $R_E$} & \textbf{Collector} & \textbf{Common-Base} \\
+		\midrule
+		Terminal Voltage Gain& $-g_mR_L \cong -10V_{CC}$&$-\frac{R_L}{R_E}$&1&$+g_mR_L \cong +10V_{CC}$ \\
+		$A_{vt}=\frac{v_o}{v_1}$&(high)&(moderate)&(low)&(high)\\
+		Input terminal resistance		    &$r_{\pi}$ (moderate)	&$\beta_oR_E$ (high)&$\beta_oR_E$ (high)&$\frac{1}{g_m}$ (low)\\
+		Output terminal resistance &$r_o$ (moderate)&$\beta_fR_E$ (high)&$\frac{1}{g_m}$ (low) & $\mu_f(R_I||R_4)$ (high)\\
+		Current gain &$-\beta_0$ (moderate) &$-\beta_0$ (moderate) & $\beta_0+1$ (moderate)&1 (low) \\
+		\bottomrule
+	\end{tabular}}
+	\label{tab:BJT_simplified} 
+\end{table}
+Konsultiere Fig. 14.27 für Zuordnung der in der Tabelle angegebenen Größen.
+
+\subsubsection{The FET Amplifiers}
+Auch hier stellen wir fest, dass bei vernachlässigbarem Innenwiderstand der Signalquelle folgende Gesamtverstärkung für alle drei FET-Konfigurationen gilt:
+\[ |A_v| \cong \frac{g_mR_L}{1+g_mR} = \frac{R_L}{\frac{1}{g_m}+R} \]
+sowie
+\[ |v_{gs}| \leq \SI{0.2}{\volt}(V_{GS}-V_{TN})(1+g_mR). \]
+Die aus vorherigem Abschnitt abgebildeten FET-Spalten lassen sich noch weiter vereinfachen:
+\begin{table}[h!]
+	\caption{Simplified Characteristics of Single FET Amplifiers}
+	\centering
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{ccccc}
+			\toprule
+			\textbf{Design Parameter}	&\textbf{Common-Source} &\textbf{Common-Source with}&\textbf{Common-} &	\\
+			&\textbf{$R_E=0$} & \textbf{Source Resistor $R_E$} & \textbf{Drain} & \textbf{Common-Gate} \\
+			\midrule
+			Terminal Voltage Gain& $-g_mR_L \cong -V_{DD}$&$-\frac{R_L}{R_S}$&1&$+g_mR_L \cong +V_{DD}$ \\
+			$A_{vt}=\frac{v_o}{v_1}$&(moderate)&(moderate)&(low)&(moderate)\\
+			Input terminal resistance		    &$\infty$ (high)	&$\infty$ (high)&$\infty$ (high)&$\frac{1}{g_m}$ (low)\\
+			Output terminal resistance &$r_o$ (moderate)&$\mu_fR_S$ (high)&$\frac{1}{g_m}$ (low) & $\mu_f(R_I||R_6)$ (high)\\
+			Current gain &$\infty$ (high) &$\infty$ (high) & $\infty$ (high)&1 (low) \\
+			\bottomrule
+	\end{tabular}}
+	\label{tab:FET_simplified} 
+\end{table}
+
+\subsection{Common-Source Amplifiers Using MOS Inverters}
+\textit{Dieser Abschnitt wird möglicherweise erst mit der Bearbeitung der Aufgaben gefüllt.}
+
+\subsection{Coupling and Bypass Capacitor Design}
+In diesem Abschnitt wird die Impedanz der Kuppel- und Bypass-Kapazitäten berücksichtigt, mit dem Ziel diese so zu dimensionieren, dass unsere Midband Annahme weiterhin valide ist. Zu diesem Zweck werden die Kapazitäten in ihrer Auswirkung einzeln berücksichtigt, während die restlichen weiterhin keine Impedanz aufweisen.
+\subsubsection{Common-Emitter und Common-Source Verstärker}
+\paragraph{Kuppel-Kapazitäten $C_1$ und $C_2$} Als Referenz für die folgenden Ausdrücke sollen Fig. 14.34 und 14.35 dienen.
+ \[ C_1 \gg \frac{1}{\omega(R_I+R_{\text{in}})} \]
+ Dabei gilt für BJTs $R_{\text{in}}=R_B||R_{iB}$ bzw. für FETs $R_{\text{in}}=R_G||R_{iG}$.\\
+ \\
+ Für die Kapazität $C_2$ soll analog gelten:
+ \[ C_2 \gg \frac{1}{\omega(R_3+R_{\text{out}})} \]
+ Dabei gilt für BJTs $R_{\text{out}}=R_C||R_{iC}$ bzw. für FETs $R_{\text{out}}=R_D||R_{iD}$.
+ 
+ \paragraph{Bypass-Kapazität $C_3$}
+ Für CE- und CS-Verstärker soll für Kapazität $C_3$ gelten:
+ \[ C_3 \gg \frac{1}{\omega \left[ R_4 || \left( R_E+\frac{1}{g_m} \right) \right]} \quad \text{bzw.} \quad C_3 \gg \frac{1}{\omega \left[ R_4 || \left( R_S+\frac{1}{g_m} \right) \right]} \]
+ Um die Ungleichung zu erfüllen, legen wir fest, dass die linke Seite $10 \times$ größer als die rechte Seite soll.
+ 
+ \subsubsection{Common-Collector und Common-Drain Verstärker}
+ Als Referenz für die folgenden Ausdrücke sollen Fig. 14.36 dienen.
+ \[ C_1 \gg \frac{1}{\omega(R_I+R_{\text{in}})} \]
+ Dabei gilt für BJTs $R_{\text{in}}=R_B||R_{iB}$ bzw. für FETs $R_{\text{in}}=R_G||R_{iG}$.\\
+ \\
+ Für die Kapazität $C_2$ soll analog gelten:
+ \[ C_2 \gg \frac{1}{\omega(R_3+R_{\text{out}})} \]
+ Dabei gilt für BJTs $R_{\text{out}}=R_6||R_{iE}$ bzw. für FETs $R_{\text{out}}=R_6||R_{iS}$.
+ 
+ \subsubsection{Common-Base und Common-Gate Verstärker}
+ Als Referenz für die folgenden Ausdrücke sollen Fig. 14.37 und 14.38 dienen. Zuerst die Kuppel-Kapazitäten:
+ \[ C_1 \gg \frac{1}{\omega(R_I+R_{\text{in}})} \]
+ Dabei gilt für BJTs $R_{\text{in}}=R_6||R_{iE}$ bzw. für FETs $R_{\text{in}}=R_6||R_{iS}$.\\
+ \\
+ Für die Kapazität $C_2$ soll analog gelten:
+ \[ C_2 \gg \frac{1}{\omega(R_3+R_{\text{out}})} \]
+ Dabei gilt für BJTs $R_{\text{out}}=R_C||R_{iC}$ bzw. für FETs $R_{\text{out}}=R_D||R_{iD}$.\\
+ Für Bypass-Kapazität $C_3$ soll gelten:
+ \[ C_3 \gg \frac{1}{\omega R_{eq}^{CB,CG}} \quad \text{mit} \quad R_{eq}^{CB}=R_1||R_2||[r_{\pi}+(\beta_o+1)(R_6||R_I)] \quad \text{bzw.} \quad R_{eq}^{CG}=R_1||R_2 \]
+ 
+ \subsubsection{Setzen der Grenzfrequenz $f_L$}
+ Eine Alternative zu obigem Verfahren kann das gewünschte Frequenzverhalten des Verstärkers auch über die Manipulation der Grenzfrequenz erreicht werden.\\
+ \\
+ \textit{Weitere Ausdrücke und Zusammenhänge folgen bei Bearbeitung der Aufgaben.}
+ 
+ \subsection{Multistage ac-Coupled Amplifiers}
+ Um extreme Spezifikationen zu erreichen, können verschiedene Single-Transistor-Konfigurationen (über Kuppel-Kapazitäten) aneinandergeschalten werden. Da sie nur über Kapazitäten miteinander verbunden sind, bleiben die individuellen Arbeitspunkte der einzelnen Stufen voneinander unabhängig.\\
+ \\
+ \textit{Weitere Ausdrücke und Zusammenhänge folgen bei Bearbeitung der Aufgaben.}
+
+\end{document}
